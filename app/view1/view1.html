@@ -1,0 +1,13 @@
+        <ng-form>
+            <input type="text" ng-model="searchTerm" name="search" id="search"/>
+            <button warning ng-click="beginSearch()">Search for GitHub repo</button>
+        </ng-form>
+
+        <ul>
+           <li ng-repeat="item in items">
+               {{item.full_name}} {{item.owner.login}} {{item.name}}
+               <a ng-href="#/view2/{{item.owner.login}}/{{item.name}}">See detail</a>
+               <a ng-href="#/view3/{{item.owner.login}}/{{item.name}}">View commit history</a>
+
+           </li>
+        </ul>
