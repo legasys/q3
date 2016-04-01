@@ -20,8 +20,8 @@ angular.module('myApp.view3', ['ngRoute', 'myApp.view3Services'])
         $scope.reponame=$routeParams.reponame;
 
         $scope.beginSearch = function() {
-          $scope.list = view3Service.get({owner:$scope.repoowner,repo:$scope.reponame}, function (data) {
-            $scope.data = data[0].url;
+          $scope.list = view3Service.get({owner:  $scope.repoowner, repo: $scope.reponame}, function (data) {
+            $scope.data = data;
           });
         };
 
@@ -31,14 +31,12 @@ angular.module('myApp.view3', ['ngRoute', 'myApp.view3Services'])
     }]);
 
 
+
+
 angular.module('myApp.view3Services', ['ngResource'])
-    .factory('view3Service', ['$resource',
-      function($resource){
-        var targetUrl = "https://api.github.com/repos/:owner/:repo/commits";
-        return $resource(targetUrl, {}, {
-          query: {method:'GET',params:{}, isArray:true}
-        });
-      }]);
-
-
-
+    .factory('view3Service', function($resource) {
+      return $resource(
+          'https://api.github.com/repos/:owner/:repo',
+          {'query': { method: 'GET' }}
+      );
+    })
